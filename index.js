@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const jsonfile = require('jsonfile');
 const cors = require('cors');
 const uuid = require('uuid');
 const User = require('./module.js')
@@ -18,6 +19,12 @@ app.get('/user/read', (req, res) => {
 	const user = new User();
 
 	res.json(user.getUserById(id));
+})
+
+
+app.get('/', (req, res) => {
+	const data = jsonfile.readFileSync('./db.json');
+	res.json(data.users);
 })
 
 
