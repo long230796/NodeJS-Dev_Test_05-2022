@@ -24,7 +24,11 @@ app.get('/user/read', (req, res) => {
 
 app.get('/', (req, res) => {
 	const data = jsonfile.readFileSync('./db.json');
-	res.json(data.users);
+	if (Array.isArray(data.users) && data.users.length > 0) {
+		res.json({data: data.users});
+	} else {
+		res.json({data: null});
+	}
 })
 
 
@@ -79,4 +83,7 @@ app.delete('/user/edit/:id', (req, res) => {
 
 
 
-app.listen(port, () => console.log(`server listening on port ${port}`))
+app.listen(
+	port,
+	() => console.log(`server listening on port ${port}`)
+)

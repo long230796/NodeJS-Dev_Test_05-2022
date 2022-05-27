@@ -17,7 +17,7 @@ class User {
 			item.id === id
 		)
 		if (user.length > 0) {
-			return user;
+			return {data: user};
 		} else {
 			return {data: null};
 		}
@@ -42,10 +42,10 @@ class User {
 				for (let key in userData) { users[i][key] = userData[key] }
 				data.users = users;
 				return this.writeFile(data);
-			} else {
-				return {data: null};
 			}
 		}
+		
+		return {data: null};
 	}
 
 
@@ -72,7 +72,7 @@ class User {
 		)
 
 		newUser = newUser.sort().reverse();
-		return newUser.length > 0 ? newUser : {data: null}
+		return newUser.length > 0 ? {data: newUser} : {data: null}
 
 	}
 
